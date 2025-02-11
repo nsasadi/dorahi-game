@@ -1,45 +1,58 @@
-const gameData = {
-    stages: [
-        { question: "بین نجات جان یک حیوان دست‌آموز و یک کودک کدام را انتخاب می‌کنی؟", option1: "کودک", option2: "نجات حیوان دست‌آموز" },
-        { question: "بین خرید گوشی مورد علاقه و کمک به یک خانواده فقیر که کودک‌شان سوءتغذیه دارد، کدام را انتخاب می‌کنی؟", option1: "کمک به خانواده فقیر", option2: "گوشی مورد علاقه" },
-        { question: "دوستت به کمک نیاز دارد تا برای امتحان آماده شود. آیا وقتت را با او تقسیم می‌کنی یا فقط بر مطالعه خودت تمرکز می‌کنی؟", option1: "به دوستم هم کمک می‌کنم", option2: "خودم درس می‌خوانم" }
-    ]
-};
-
-let currentStage = 0;
-
-document.getElementById("startButton").addEventListener("click", startGame);
-
-function startGame() {
-    nextStage();
-}
-
-function nextStage() {
-    if (currentStage < gameData.stages.length) {
-        document.body.style.backgroundColor = getRandomPastelColor();
-        document.getElementById("question").innerText = gameData.stages[currentStage].question;
-        document.getElementById("container").innerHTML = `
-            <h1>${gameData.stages[currentStage].question}</h1>
-            <button onclick="submitAnswer(1)">${gameData.stages[currentStage].option1}</button>
-            <button onclick="submitAnswer(2)">${gameData.stages[currentStage].option2}</button>
-        `;
-    } else {
-        document.body.style.backgroundColor = getRandomPastelColor();
-        document.getElementById("container").innerHTML = "<h1>ممنون که بازی کردی!</h1>";
-    }
-}
-
-function submitAnswer(choice) {
-    if (choice === 1) {
-        document.getElementById("container").innerHTML = "<h1>ممنون که بازی کردی!</h1>";
-        document.body.style.backgroundColor = getRandomPastelColor();
-    } else {
-        currentStage++;
-        nextStage();
-    }
-}
-
-function getRandomPastelColor() {
-    const pastelColors = ["#FFDDC1", "#FFC1E3", "#C1FFD7", "#C1E1FF", "#FFD1C1", "#E1C1FF"];
-    return pastelColors[Math.floor(Math.random() * pastelColors.length)];
-}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بازی دو راهی</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s ease;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #ff7f7f;
+            color: white;
+        }
+        button:hover {
+            background-color: #ff4f4f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="question">صفحه ورود</h1>
+        <button onclick="startGame()">شروع بازی</button>
+    </div>
+    <script>
+        function changeBackgroundColor() {
+            const colors = ["#FFDDC1", "#FFABAB", "#FFC3A0", "#D5AAFF", "#85E3FF", "#B9FBC0"];
+            document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+        function startGame() {
+            window.location.href = "game.html";
+        }
+        changeBackgroundColor();
+    </script>
+</body>
+</html>
